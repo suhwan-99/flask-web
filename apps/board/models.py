@@ -10,3 +10,12 @@ class Board(db.Model):
   created_at = db.Column(db.DateTime, default = datetime.now)
   user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'), nullable = False) 
   user = db.relationship('User', backref = db.backref('boards'))
+
+class Reply(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  content = db.Column(db.Text(), nullable = False)
+  created_at = db.Column(db.DateTime, default = datetime.now)
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'), nullable = False) 
+  user = db.relationship('User', backref = db.backref('user_replies'))
+  board_id = db.Column(db.Integer, db.ForeignKey('board.id', ondelete='CASCADE'))
+  board = db.relationship('Board', backref= db.backref('reply_list'))
