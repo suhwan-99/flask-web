@@ -1,0 +1,10 @@
+{% extends "auth/base.html" %}
+
+{% block title %} auth index {% endblock %}
+
+{% block content %} 
+<h2>auth index page</h2>
+<a href="{{ url_for('auth.signup') }}">회원가입 페이지 이동</a>
+<br>
+<a href="{{ url_for('auth.login') }}">로그인 페이지 이동</a>
+{% endblock %}

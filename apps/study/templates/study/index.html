@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('study.static', filename = 'style.css' )}}">
+  <title>Document</title>
+</head>
+<body>
+  
+  <h1> study 인덱스 페이지</h1>
+  <a href="{{ url_for('study.write') }}">글 작성</a>
+
+  <table>
+    <tr>
+      <th> 제목</th>
+      <th> 내용</th>
+      <th> 작성자</th>
+      <th> 작성일</th>
+    </tr>
+    {% for post in posts%}
+    <tr>
+      <td><a href="{{ url_for('study.edit', id = post.id) }}"> {{post.subject}}</a></td>
+      <td> {{post.content}} </td>
+      <td> {{post.writer}} </td>
+      <td> {{post.created_at}} </td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>

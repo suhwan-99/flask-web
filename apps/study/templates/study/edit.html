@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>글 수정, 삭제 페이지</h1>
+   <form action="{{ url_for('study.edit', id = post.id) }}" method="post" novalidate>
+    {{form.csrf_token}}
+    <p> 
+      {{ form.subject.label}} {{form.subject(placeholder="글 제목", value = post.subject)}} 
+    </p>
+      {% for error in form.subject.errors %}
+          <span style="color: red;"> {{error}} </span>
+      {% endfor %}
+
+    <p> 
+      {{ form.content.label}} {{form.content(placeholder="내용", value = post.content)}} 
+    </p>
+      {% for error in form.content.errors %}
+          <span style="color: red;"> {{error}} </span>
+      {% endfor %}
+
+    <p> 
+      {{ form.writer.label}} {{form.writer(placeholder="작성자", value = post.writer)}} 
+    </p>
+      {% for error in form.writer.errors %}
+          <span style="color: red;"> {{error}} </span>
+      {% endfor %}
+       
+      <p> <input type="submit" value="수정하기"> </p>
+
+      
+    </form>
+    <form action="{{ url_for ( 'study.delete_post', id = post.id) }}" method="post">
+      {{form.csrf_token}}
+      <p> <input type="submit" value="삭제하기"> </p>
+    </form>
+</body>
+</html>

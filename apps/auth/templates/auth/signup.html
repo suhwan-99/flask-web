@@ -1,0 +1,32 @@
+{% extends "detector/base.html" %}
+
+{% block title %} 회원가입 {% endblock %}
+
+{% block content %} 
+
+<div class="mx-auto dt-auth-main">
+  <div class="card dt-auth-main">
+    {% for field in form %}
+    {% for error in field.errors %}
+    <p style="color: red;"> {{error}} </p>
+    {% endfor%}
+    {% endfor %}
+    <header>회원가입 페이지</header>
+    <section>
+
+      <form class="form-signin" action="{{ url_for('auth.signup') }}", method="post", novalidate>
+        {{form.csrf_token}}
+        <p> {{form.username.label}} {{form.username(placeholder='사용자명', class="form-control dt-auth-input")}} </p>
+        
+        <p> {{form.password.label}} {{form.password(placeholder='비밀번호 3 ~ 20글자', class="form-control dt-auth-input")}} </p>
+        
+        <p> {{form.email.label}} {{form.email(placeholder='이메일', class="form-control dt-auth-input")}} </p>
+        {% for msg in get_flashed_messages() %}
+        <p style="color: blue;">{{msg}}</p>
+        {% endfor %}
+        <p> {{form.submit(class="btn btn-md btn-primary btn-block dt-auth-btn") }} </p>
+      </form>
+    </section>
+  </div>
+</div>
+  {% endblock %}

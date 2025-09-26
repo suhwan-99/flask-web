@@ -1,0 +1,30 @@
+{% extends "detector/base.html" %}
+
+{% block content %}
+<h2>게시판 페이지</h2>
+  <div class="container my-3">
+    <a class="btn btn-primary mb-3" href="{{ url_for('board.new_board') }}">글쓰기</a>
+    <table class="table">
+      <thead>
+        <tr class="table-dark">
+          <th>번호</th>
+          <th>제목</th>
+          <th>작성자</th>
+          <th>작성일시</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for post in posts %}
+        <tr>
+          <td> {{post.id}}</td>
+          <td>
+              <a href="{{ url_for ('board.detail', board_id = post.id)}}">{{post.subject}}</a>
+          </td>
+          <td> {{post.user.username}} </td>
+          <td>{{post.created_at}} </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

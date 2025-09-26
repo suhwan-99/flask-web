@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1> 글 작성 페이지</h1>
+
+  <!-- 에러 메세지를 이중for 문으로 한번에 적용 -->
+  {% for field in form %}
+    {% for error in field.errors %}
+      <p style="color: red;"> {{error}} </p>
+    {% endfor%}
+  {% endfor %}
+
+
+  <form action="{{ url_for('study.write') }}" method="post" novalidate>
+    {{form.csrf_token}}
+    <p> 
+      {{ form.subject.label}} {{form.subject(placeholder="글 제목")}} 
+    </p>
+      {% for error in form.subject.errors %}
+          <span style="color: red;"> {{error}} </span>
+      {% endfor %}
+
+    <p> 
+      {{ form.content.label}} {{form.content(placeholder="내용")}} 
+    </p>
+      {% for error in form.content.errors %}
+          <span style="color: red;"> {{error}} </span>
+      {% endfor %}
+
+    <p> 
+      {{ form.writer.label}} {{form.writer(placeholder="작성자")}} 
+    </p>
+      {% for error in form.writer.errors %}
+          <span style="color: red;"> {{error}} </span>
+      {% endfor %}
+
+    <p> {{ form.submit() }} </p>
+  </form>
+</body>
+</html>

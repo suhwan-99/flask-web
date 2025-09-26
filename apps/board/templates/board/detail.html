@@ -1,0 +1,26 @@
+{% extends "detector/base.html" %}
+
+{% block content %}
+<div class="mb-3">
+  <label class="form-label">제목</label>
+  <input type="text" class="form-control" value="{{ board.subject }}" readonly>
+</div>
+<div class="mb-3">
+  <label class="form-label">작성자</label>
+  <input type="text" class="form-control" value="{{ board.user.username }}" readonly>
+</div>
+<div class="mb-3">
+  <label class="form-label">작성일자</label>
+  <input type="text" class="form-control" value="{{ board.created_at }}" readonly>
+</div>
+<div class="mb-3">
+  <label class="form-label">내용</label>
+  <textarea class="form-control" rows="10" readonly>{{ board.content }}</textarea>
+</div>
+<div class="mb-3">
+  {% if current_user.id == board.user.id %}
+  <a class="btn btn-warning" href="{{ url_for('board.new_board', board_id = board.id)}}">수정</a>
+  <a class="btn btn-danger" href="">삭제</a>
+  {% endif %}
+</div>
+{% endblock %}
